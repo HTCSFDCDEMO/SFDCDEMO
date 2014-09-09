@@ -1,0 +1,4 @@
+<apex:page standardController="Account">
+<H1>Hello</H1>
+<apex:detail subject="{!$User.FirstName}!" relatedList="False" title="false"/>
+ </apex:page>

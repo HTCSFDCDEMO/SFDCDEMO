@@ -1,0 +1,98 @@
+<apex:page Controller="LeadManagementController" >
+ <style >
+        #page-container{padding: 0; margin: 0; background-color:#585858;font-size:20px; color:white;}
+        
+      <!-- 
+       #image{padding: 0; margin: 0; text-align: center;}
+        #links{ text-color:#0000FF ; font-size:20px;}-->
+    </style>
+
+<div id="page-container" width="500%" height="500%" align="center">
+
+  <apex:image value="{!$Resource.hibu}" width="10%" height="10%"/>
+<apex:form >
+<apex:pageBlock >
+<apex:pageBlockSection >
+ <section id="search">
+                <div class="input">
+                    <span id="search-icon">search</span>
+                    <input type="text" id="input-search" class="input-search" placeholder="Search Your Leads.."/>
+                </div>
+            </section>
+            </apex:pageBlockSection>
+</apex:pageBlock>
+ 
+
+            <section>
+            <apex:outputLink styleClass="toggle-select">
+              <div class="options">
+              <ul>
+               <li>
+                        <a href="#" data-value="my-leads" class="active">My Leads &amp; Prospects</a>
+                         </li>
+                          <li>
+                        <a href="#" data-value="queue">Queue</a>
+                         </li>
+                        </ul>
+                    </div>
+                    </apex:outputLink>
+                    </section>
+                           <section id="queue-filter">
+                <div class="controls" style="color:white">
+                    <ol>Filter
+                    <li  style="color:white">
+                    <a href="#" id ="links" class="apply"  style="color:white">Apply</a>
+                     </li>
+                      <li>
+                    <a href="#" id ="links" class="close">Close</a>
+                     </li>
+                      <li>
+                    <a href="#" id ="links" class="open">Open</a>
+                    </li>
+                    </ol>
+                </div>
+
+                <div class="error">
+                    State is a required filter for the queue.
+                </div>
+
+                <div class="filters">
+
+                    <label for="filter-state">State <span class="required">*</span></label>
+                    <div class="input">
+                        <apex:selectList multiselect="false" size="1" styleClass="filter-state">
+                            <apex:selectOptions value="{!stateOptions}" />
+                        </apex:selectList>
+                    </div>
+
+                    <label for="filter-city">City</label>
+                    <div class="input">
+                        <input type="text" name="filter-city" class="filter-city" placeholder="enter (part of) the city name…" />
+                    </div>
+
+                    <label for="filter-zip">Zip code</label>
+                    <div class="input">
+                        <input type="text" name="filter-zip" class="filter-zip" value="" placeholder="enter a zip code…"/>
+                    </div>
+
+                    <label for="filter-primary">Primary classification</label>
+                    <div class="input">
+                        <input type="text" class="filter-primary" name="filter-primary" value="" placeholder="enter primary name…" />
+                    </div>
+
+                    <label for="filter-score">Lead score</label>
+                    <div class="input">
+                        <apex:selectList multiselect="false" size="1" styleClass="filter-score">
+                            <apex:selectOptions value="{!leadScoreOptions}" />
+                        </apex:selectList>
+                    </div>
+                </div>
+            </section>
+            
+  <apex:commandButton value="Save" action="{!save}"/>  
+    <apex:commandButton value="Cancel" action="{!cancel}"/>  
+    </apex:form>
+</div>
+
+                 
+</apex:page>

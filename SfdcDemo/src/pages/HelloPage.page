@@ -1,0 +1,18 @@
+<apex:page tabStyle="Lead" standardController="Lead">
+<apex:sectionHeader title="Lead Edit Page" subtitle="This Lead"/>
+<apex:form >
+<apex:pageBlock title="Lead" mode="edit">
+<apex:pageBlockButtons location="Top">
+<apex:commandButton value="Save" action="{!Save}"/>
+<apex:commandButton value="Cancel" action="{!Cancel}"/>
+</apex:pageBlockButtons>
+<apex:PageBlockSection title="Lead Information" columns="3">
+<apex:inputField value="{!Lead.FirstName}" required="true"/>
+<apex:inputField value="{!Lead.LastName}" required="true"/>
+</apex:PageBlockSection>
+
+</apex:pageBlock>
+</apex:form>
+<!--<c:mt_component borderWidth="1" text="WelCome"/>-->
+
+</apex:page>

@@ -1,0 +1,56 @@
+<apex:page controller="JobRoleGroupController" id="mainPage" >
+
+    <apex:form id="formID" >
+    <apex:pageMessages id="ErrorInfoMessage" />
+         <apex:pageBlock title="Job Role Group">
+            <table width="100%" columns="2">
+                <tr>
+                    <td>
+                       <!-- <apex:pageBlock id="searchResult" >
+                            <div style="width:400px;margin:0 0 50px;">
+                                <c:FilterComponent id="ans" label="Search Job Role Group" objectName="JobRoleGroup__c" fieldList="name" filter="true" pageSize="5" attributeList="name" orderBy="id" paginationLocation="bottom" paginationAlignment="right" tableWidth="400px" />
+                            </div>
+                        </apex:pageBlock>-->
+
+                        <apex:pageBlock >
+                            
+                                <apex:actionFunction action="{!searchJobRoleGroupFilterData}" name="methodOneInJavascript" rerender="searchResult,ErrorInfoMessage"/>
+                                 <apex:outputPanel onkeyup="methodOneInJavascript('Yes!')"> 
+                                     <apex:outputLabel value="Job Role Group"/>  
+                                     <apex:inputText value="{!strSearchCriteria}"/><br/><br/> 
+                                </apex:outputPanel>
+                                <div style="width:400px;margin:0 0 50px;">
+                                    <apex:dataTable id="searchResult" value="{!lstAllJobRoleGroupFilter}" var="varJRG"  cellspacing="5" cellpadding="1" border="0" bgcolor="white">
+                                        <apex:column headerValue="Group Name">
+                                            <apex:commandLink action="{!enableEditMode}" style="text-decoration: none;"  >
+                                                    <apex:outputText value="{!varJRG.Name}" /><br/>
+                                                    <apex:param name="delID" value="{!varJRG.id}"/>
+                                                    <apex:param name="delName" value="{!varJRG.Name}"/>
+                                            </apex:commandLink>
+                                        </apex:column>
+                                        <apex:column headerValue="" >
+                                           <apex:commandLink action="{!ActiveInactiveJobRoleGroup}">
+                                                <apex:image url="{!if(varJRG.IsActive__c==false,$Resource.GreemButton,$Resource.RedButton)}" width="15" height="15"/>
+                                                <apex:param name="delID" value="{!varJRG.id}"/>
+                                            </apex:commandLink>
+                                        </apex:column>
+                                    </apex:dataTable> 
+                                </div>
+                        </apex:pageBlock>
+                    </td>
+                    <td>
+                        <apex:pageBlock id="updateblock" rendered="{!bolShowEdit}" >
+                            <apex:inputText value="{!strUpdateJobsRoles}" />
+                            <apex:commandButton value="Update JRG" action="{!UpdateJobRoleGroup}" reRender="formID"/>
+                        </apex:pageBlock>
+                    </td>
+                </tr>
+            </table>
+        </apex:pageBlock>
+       
+        <apex:pageBlock id="createGrp" title="Create Job Roles Groups">
+            <apex:inputText value="{!strNewJobsRoles}" />
+            <apex:commandButton value="Create Job Role Group" action="{!createJobRoleGroup}" reRender="formID"/>
+        </apex:pageBlock> 
+  </apex:form>
+</apex:page>
