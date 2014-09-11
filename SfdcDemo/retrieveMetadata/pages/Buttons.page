@@ -1,0 +1,27 @@
+<apex:page showheader="false" standardController="Account" recordsetVar="accounts" >
+    <style>
+      .accountLink { color: blue; cursor: pointer; cursor: hand; }
+      .phone{ color: red; cursor: pointer; cursor: hand; }
+  </style>
+
+   <apex:dataList value="{!accounts}" var="account" id="theList">
+         
+          <apex:outputLink value="/{!account.id}" styleClass="accountLink ">{!account.name}: - &nbsp;&nbsp;
+          </apex:outputLink>
+       
+           <apex:outputText value="{!account.phone}" styleClass="phone"/>
+    </apex:dataList>
+    
+    <apex:dataTable value="{!accounts}" var="account">
+    <apex:facet name="caption">AccountNames</apex:facet>
+                     <apex:facet name="footer">AccountNames</apex:facet>
+                <apex:column styleClass="accountLink">
+                      <apex:outputLink value="{!account.name}">{!account.name}:</apex:outputLink>
+                </apex:column>
+                <apex:column >
+                      <apex:outputText value="{!account.phone}"/>
+                </apex:column>
+      
+    </apex:dataTable>
+  
+ </apex:page>

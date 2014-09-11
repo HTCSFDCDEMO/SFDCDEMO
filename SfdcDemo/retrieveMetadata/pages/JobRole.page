@@ -1,0 +1,66 @@
+<apex:page controller="JobRoleController" showHeader="false">
+    <apex:form id="formID" >
+        <apex:pageMessages id="ErrorInfoMessage"/>
+        <apex:pageBlock title="Job Role">
+            <table width="100%" columns="2">
+                <tr>
+                    <td>
+                        <apex:pageBlock >
+                            <apex:actionFunction action="{!getFilteredJobRoleList}" name="methodOneInJavascript" rerender="searchResult,ErrorInfoMessage"/>
+                            <apex:outputPanel onkeyup="methodOneInJavascript('Yes!')"> 
+                                <apex:outputLabel value="Job Role:"/> 
+                                <apex:inputText value="{!strSearchCriteria}" /><br/><br/> 
+                            </apex:outputPanel>
+                            <div style="width:400px;margin:0 0 50px;">
+                                <apex:dataTable id="searchResult" value="{!lstFilteredJobRoles}" var="varJobRole" cellspacing="5" cellpadding="1" border="0" bgcolor="white">
+                                    <apex:column headerValue="Job Role Name">
+                                        <apex:commandLink action="{!enableEditMode}">
+                                            <apex:outputText value="{!varJobRole.Name}"/><br/>
+                                            <apex:param name="delID" value="{!varJobRole.id}"/>
+                                            <apex:param name="delName" value="{!varJobRole.Name}"/>
+                                        </apex:commandLink>
+                                    </apex:column>
+                                    <apex:column headerValue="" >
+                                        <apex:commandLink action="{!activateOrDeactivateJobRole}">
+                                            <apex:image url="{!if(varJobRole.IsActive__c==false,$Resource.GreemButton,$Resource.RedButton)}" width="15" height="15"/>
+                                            <apex:param name="delID" value="{!varJobRole.id}"/>
+                                        </apex:commandLink>
+                                    </apex:column>
+                                </apex:dataTable>
+                            </div>  
+                        </apex:pageBlock> 
+                    </td>
+                    <td>
+                        <apex:pageBlock id="updateblock" rendered="{!bolShowEdit}" >
+                            <apex:inputText value="{!strUpdateJobsRoles}" />
+                            <apex:commandButton value="Update Job Role" action="{!updateJobRoles}" reRender="formID"/>
+                            <apex:dataTable id="searchResult" value="{!lstObjJRPermission}" var="varJRPermission" cellspacing="5" cellpadding="1" border="0" bgcolor="white">
+                                <apex:column headerValue="">
+                                    <apex:outputText value="{!varJRPermission.strPermissionName}"/><br/>
+                                    <apex:inputCheckbox value="{!varJRPermission.bolPermission}"/><br/>
+                                </apex:column>
+                            </apex:dataTable>
+                        </apex:pageBlock>
+                    </td>
+                </tr>
+            </table>
+        </apex:pageBlock>
+        
+        <apex:pageBlock id="createJobRole" title="Create Job Roles">
+            <apex:outputText value="View Template"/>
+            <apex:selectList size="1" value="{!strViewTemplateID}">
+                <apex:selectOptions value="{!getViewTemplateNames}"/>
+            </apex:selectList>
+            <apex:commandButton value="Create Template View" action="{!enableCreateViewTemplate}"/>
+            <apex:outputpanel id="createViewTemplate" rendered="{!bolCreateViewTemplate}"  >
+                <apex:outputText value="Job Role Name "/>
+                <apex:inputText value="{!strViewTemplateName}" />
+                 <apex:commandButton value="Create View Template" action="{!createViewTemplate}"/>
+            </apex:outputpanel>
+            <br/><br/>
+            <apex:outputText value="Job Role Name "/>
+            <apex:inputText value="{!strNewJobsRoles}" />
+            <apex:commandButton value="Create Job Role" action="{!createJobRoles}"/>
+        </apex:pageBlock> 
+    </apex:form>
+</apex:page>

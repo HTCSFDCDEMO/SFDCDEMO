@@ -1,0 +1,4 @@
+<apex:page controller="JobRoleAjaxController"  action="{!doJobRoleSearch}"
+contentType="text/plain; charset=utf-8" showHeader="false" standardStylesheets="false" sidebar="false">
+{!result}
+</apex:page>

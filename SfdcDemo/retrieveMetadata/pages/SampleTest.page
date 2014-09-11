@@ -1,0 +1,63 @@
+<apex:page controller="sample"> 
+  <style type="text/css">
+.myClass1 label { 
+    color: red; 
+}
+
+.myClass2 label{ 
+    color: green; 
+}
+</style>
+      <apex:form styleClass="myClass1" >
+  
+   <apex:pageBlock title="Select dependency">
+             <apex:pageBlockSection >
+             <apex:pageBlockSectionItem >
+              <apex:outputLabel value="Selection"></apex:outputLabel>
+         <apex:selectList value="{!selectedValue}" size="1">
+           <apex:selectOption itemLabel="--None--" itemValue="--None--"></apex:selectOption>
+              <apex:selectOption itemLabel="Yes" itemValue="Yes"></apex:selectOption>
+              <apex:selectOption itemLabel="No" itemValue="No"></apex:selectOption>
+              <apex:actionSupport event="onchange" reRender="iText1,iText2"/>
+         </apex:selectList>
+          </apex:pageBlockSectionItem>
+           
+          <apex:pageBlockSectionItem >
+          <apex:outputLabel value="Field 1"></apex:outputLabel>
+          <apex:inputText id="iText1" disabled="{!selectedValue == 'Yes' || selectedValue == '--None--'}" />
+          </apex:pageBlockSectionItem>
+          
+          <apex:pageBlockSectionItem >
+          <apex:outputLabel value="Field 2"></apex:outputLabel>
+          <apex:inputText id="iText2" disabled="{!selectedValue == 'No' || selectedValue == '--None--'}" />
+          </apex:pageBlockSectionItem>
+          </apex:pageBlockSection>
+              <apex:commandButton value="Save" action="{!save}"/>
+              <apex:commandButton value="Cancel" action="{!cancel}"/>
+       </apex:pageBlock>  
+          
+      </apex:form>
+      <apex:form styleClass="myClass2">
+       <apex:pageBlock title="Phones">
+                 <apex:selectCheckboxes value="{!phones}" >
+                <apex:selectOptions value="{!items}"/>
+                </apex:selectCheckboxes><br/>
+                     <apex:commandButton value="Test" action="{!test}" rerender="out" status="status"/>
+                    <apex:actionSupport event="onchange" reRender="Text"/>
+        </apex:pageBlock>
+      </apex:form>
+      <apex:form >
+      <apex:outputPanel id="out">
+        <apex:actionstatus id="status" startText="testing...">
+            <apex:facet name="stop">
+                <apex:outputPanel >
+                    <p>You have selected below produts:</p>
+                    <apex:outputLabel value="PRODUCT"></apex:outputLabel>
+                     <apex:inputText id="Text" disabled="{!selectedValue == 'NOKIA'}" />
+                    <apex:dataList value="{!phones}" var="c">{!c}</apex:dataList>
+                </apex:outputPanel>
+            </apex:facet>
+        </apex:actionstatus>
+    </apex:outputPanel>
+      </apex:form>
+    </apex:page>

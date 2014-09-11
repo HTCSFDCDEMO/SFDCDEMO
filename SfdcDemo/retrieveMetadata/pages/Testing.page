@@ -1,0 +1,8 @@
+<apex:page controller="MyTestingController" tabStyle="Account">
+<Apex:Form >
+    <apex:pageBlock title="Hello {!$User.FirstName}!">
+    
+        This is your new page for the {!name} controller.
+    </apex:pageBlock>
+    </Apex:Form>
+</apex:page>

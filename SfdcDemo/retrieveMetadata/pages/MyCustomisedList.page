@@ -1,0 +1,30 @@
+<apex:page standardController="Account" recordSetVar="accountList" extensions="MyCustomizedLists" showHeader="false" sidebar="false" >
+  
+<apex:form >
+<!-- View selection widget, uses StandardController methods -->
+<apex:pageBlock title="Select Fields to Customised Display" id="selectionBlock">
+<apex:pageMessages />
+<apex:outputLabel value="Available Tabs"/>
+<apex:panelGrid columns="3">
+<apex:selectList id="unselected_list" required="false" value="{!selectedData}" multiselect="true" size="15" style="width:250px">
+<apex:selectOptions value="{!unSelectedOptions}"/>
+</apex:selectList>
+<apex:panelGroup >
+<apex:commandButton value="Add" action="{!doAdd}" rerender="selectionBlock"/>
+<br/>
+<apex:commandButton value="Remove" action="{!doRemove}" rerender="selectionBlock"/>
+</apex:panelGroup>
+<apex:selectList id="selected_list" required="false" value="{!unselectedData}" multiselect="true" size="15" style="width:250px">
+<apex:outputLabel value=" Selected Customised Tabs"/><br/>
+<apex:selectOptions value="{!selectedOptions}"/>
+<br/>
+</apex:selectList>
+</apex:panelGrid>
+<apex:commandButton action="{!save}" value="Save"/>
+<!-- apex:commandButton action="{!cancel}" value="Cancel"/ -->
+</apex:pageBlock>
+
+<br/>
+
+</apex:form>
+</apex:page>

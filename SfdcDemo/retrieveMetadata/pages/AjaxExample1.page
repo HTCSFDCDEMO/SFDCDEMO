@@ -1,0 +1,13 @@
+<apex:page controller="contactController" showHeader="true" tabStyle="Contact" >
+<apex:form >
+<apex:dataTable value="{!contacts}" var="c" cellpadding="4" border="1">
+<apex:column >
+<apex:facet name="header"><b>Name</b></apex:facet>
+<apex:commandLink reRender="detail">{!c.name}
+<apex:param name="id" value="{!c.id}"/>
+</apex:commandLink>
+</apex:column>
+
+</apex:dataTable>
+</apex:form>
+</apex:page>
