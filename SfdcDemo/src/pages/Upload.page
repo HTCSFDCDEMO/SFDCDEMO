@@ -4,5 +4,6 @@
             <apex:inputFile style="width:100%" id="fileToUpload" value="{!fileBody}" filename="{!fileName}" />  
             <apex:commandButton value="Upload Attachment" action="{!UploadFile}"/>  
        </apex:pageBlock>  
+       
   </apex:form>  
 </apex:page>
